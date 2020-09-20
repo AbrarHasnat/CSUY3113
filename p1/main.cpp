@@ -159,12 +159,12 @@ void Render() {
     glBindTexture(GL_TEXTURE_2D, playerTextureID);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    for (int i = 0; i < 3; i++) {
+    
         
-        program.SetModelMatrix(starMatrix);
-        glBindTexture(GL_TEXTURE_2D, starTextureID);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-    }
+    program.SetModelMatrix(starMatrix);
+    glBindTexture(GL_TEXTURE_2D, starTextureID);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    
     
     program.SetModelMatrix(moonMatrix);
     glBindTexture(GL_TEXTURE_2D, moonTextureID);
