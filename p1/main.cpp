@@ -20,6 +20,7 @@ bool gameIsRunning = true;
 
 ShaderProgram program;
 glm::mat4 viewMatrix, playerMatrix, projectionMatrix, starMatrix, moonMatrix; //Object created here by making them matrix
+
 float iRandomValue = 0;
 float playerX = -10;
 float player_rotate = 0;
@@ -71,6 +72,7 @@ void Initialize() {
     playerMatrix = glm::mat4(1.0f);
     starMatrix = glm::mat4(1.0f);
     moonMatrix = glm::mat4(1.0f);
+
     projectionMatrix = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, -1.0f, 1.0f);
 
     program.SetProjectionMatrix(projectionMatrix);
@@ -106,6 +108,7 @@ void Update() { //update hour objects (tranlate, scale) and then render
     float ticks = (float)SDL_GetTicks() / 1000.0f;
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;
+
     iRandomValue = (rand() % 20) - 10;
 
 
@@ -149,6 +152,7 @@ void Update() { //update hour objects (tranlate, scale) and then render
 void Render() {
     float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
     float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
+
     glClear(GL_COLOR_BUFFER_BIT); 
     glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
     glEnableVertexAttribArray(program.positionAttribute);
