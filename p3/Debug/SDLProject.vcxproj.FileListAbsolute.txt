@@ -1,0 +1,6 @@
+C:\Users\abrol\OneDrive\Desktop\CS3113-master\Templates\VisualStudioSDLProject\SDLProject\Debug\SDLProject.exe
+C:\Users\abrol\OneDrive\Desktop\CS3113-master\Templates\VisualStudioSDLProject\SDLProject\Debug\SDLProject.pdb
+C:\Users\abrol\OneDrive\Desktop\examplesCS3113\Debug\SDLProject.exe
+C:\Users\abrol\OneDrive\Desktop\examplesCS3113\Debug\SDLProject.pdb
+C:\Users\abrol\Documents\CSUY3113\practice3\Debug\SDLProject.exe
+C:\Users\abrol\Documents\CSUY3113\practice3\Debug\SDLProject.pdb

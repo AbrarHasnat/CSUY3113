@@ -14,6 +14,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "Entity.h"
+#include "SDL_mixer.h"
 
 
 
@@ -34,6 +35,8 @@ ShaderProgram program;
 glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
 
 
+Mix_Music* music;
+Mix_Chunk* bounce;
 
 
 
@@ -64,8 +67,8 @@ GLuint LoadTexture(const char* filePath) {
 
 void Initialize() {
 
-    SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("PONG!!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+    displayWindow = SDL_CreateWindow("Textured", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
 
@@ -76,7 +79,11 @@ void Initialize() {
     glViewport(0, 0, 640, 480);
 
     program.Load("shaders/vertex_textured.glsl", "shaders/fragment_textured.glsl");
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
+    music = Mix_LoadMUS("dooblydoo.mp3");
+   // Mix_PlayMusic(music, -1);
 
+    bounce = Mix_LoadWAV("bounce.wav");
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
     projectionMatrix = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, -1.0f, 1.0f);
@@ -96,14 +103,14 @@ void Initialize() {
     state.player = new Entity();
     state.player->position = glm::vec3(-9.5f, 0.0f, 0.0f);
     state.player->movement = glm::vec3(0);
-    state.player->speed = 3.0f;
+    state.player->speed = 2.0f;
     state.player->scale = 3.0f; //can now control the scale
     state.player->textureID = LoadTexture("box.png");
    
     state.player2= new Entity();
     state.player2->position = glm::vec3(9.5f, 0.0f, 0.0f);
     state.player2->movement = glm::vec3(0);
-    state.player2->speed = 3.0f;
+    state.player2->speed = 2.0f;
     state.player2->scale = 3.0f;
     state.player2->textureID = LoadTexture("box.png");
     
@@ -111,8 +118,10 @@ void Initialize() {
     state.ball->position = glm::vec3(0.0f, 0.0f, 0.0f);
     state.ball->movement.y = -1; //must initilize here or else it redraws every frame
     state.ball->movement.x = 1;
-    state.ball->speed = 2.0f;
+    state.ball->speed = 1.0f;
     state.ball->textureID = LoadTexture("box.png");
+
+
 
 
 
@@ -230,6 +239,7 @@ void Update() { //handles multiple objects in a state
 
     if ((xdist1 < 0 && ydist1 < 0) || (xdist2 < 0 && ydist2 < 0)) {
         state.ball->movement.x *= -1;
+        Mix_PlayChannel(-1, bounce, 0);
         state.ball->UpdateBall(deltaTime);
     }
     else {
