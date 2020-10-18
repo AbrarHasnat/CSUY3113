@@ -122,12 +122,12 @@ void DrawText(ShaderProgram* program, GLuint fontTextureID, std::string text,
 
 
 
-GLuint fontTextureID = LoadTexture("font1.png");
+
 
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("Textured!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("Lunar Landing", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
 
@@ -158,10 +158,10 @@ void Initialize() {
 
     // Initialize Player
     state.player = new Entity();
-    state.player->position = glm::vec3(-3,3,0);
+    state.player->position = glm::vec3(-3,2.85,0);
     state.player->movement = glm::vec3(0);
     state.player->acceleration = glm::vec3(0,-0.08f,0);
-    state.player->speed = 1.5f;
+    state.player->speed = .05f;
     state.player->textureID = LoadTexture("rocket.png");
 
 
@@ -172,7 +172,7 @@ void Initialize() {
     state.player->animTime = 0;
     
     state.player->height = 0.8f;
-    state.player->width = 0.8f;
+    state.player->width = 0.65f;
     state.player->jumpPower = 4.8f;
 
 
@@ -225,12 +225,14 @@ void Initialize() {
 
     state.platforms[13].textureID = platformTextureID;
     state.platforms[13].position = glm::vec3(-2, 3.75f, 0);
+    state.platforms[13].width = 0.3f;
 
     state.platforms[14].textureID = platformTextureID;
     state.platforms[14].position = glm::vec3(2, 3.75f, 0);
 
     state.platforms[15].textureID = platformTextureID;
     state.platforms[15].position = glm::vec3(-4, 3.75f, 0);
+    state.platforms[15].width = 0.3f;
 
     state.platforms[16].textureID = platformTextureID;
     state.platforms[16].position = glm::vec3(3, 3.75f, 0);
@@ -381,11 +383,11 @@ void ProcessInput() {
 
     if (keys[SDL_SCANCODE_LEFT]) { // hold down
         state.player->movement.x = -1.0f;
-        state.player->animIndices = state.player->animLeft;
+        //state.player->animIndices = state.player->animLeft;
     }
     else if (keys[SDL_SCANCODE_RIGHT]) {
         state.player->movement.x = 1.0f;
-        state.player->animIndices = state.player->animRight;
+        //state.player->animIndices = state.player->animRight;
     }
 
 
@@ -426,6 +428,7 @@ void Update() {
 
 void Render() {
     glClear(GL_COLOR_BUFFER_BIT);
+    GLuint fontTextureID = LoadTexture("font1.png");
 
 
     for (int i = 0; i < PLATFORM_COUNT; i++) {
@@ -434,11 +437,11 @@ void Render() {
     state.player->Render(&program);
     if (!(state.player->gameOver)) {
         if (state.player->madeIt)  {
-            DrawText(&program, fontTextureID, "He", 1, -0.5f, glm::vec3(-4.25f, 3, 0));
+            DrawText(&program, fontTextureID, "Mission Successful", 1, -0.5f, glm::vec3(-4.2f, 2.5, 0));
         }
     }
     else {
-        DrawText(&program, fontTextureID, "Hesssssssssssssssssssss", 1, -0.5f, glm::vec3(-4.25f, 3, 0));
+        DrawText(&program, fontTextureID, "Mission Failed", 1, -0.5f, glm::vec3(-3, 2.5, 0));
     }
     
     

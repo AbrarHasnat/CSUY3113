@@ -158,9 +158,13 @@ void Entity::Update(float deltaTime, Entity *platforms, int platformCount)
     }
     if (!gameOver) {
         velocity.x = movement.x * speed;
+        if (deltaTime != 0) {
+            acceleration.x += (velocity.x / deltaTime); //acceleration in the x direction is set to 0 in main.cpp so we add to acceleration
+        }
         velocity += acceleration * deltaTime;
         position.y += velocity.y * deltaTime;       // Move on Y
         CheckCollisionsY(platforms, platformCount); // Fix if needed
+
 
         position.x += velocity.x * deltaTime;       // Move on X
         CheckCollisionsX(platforms, platformCount); // Fix if needed
