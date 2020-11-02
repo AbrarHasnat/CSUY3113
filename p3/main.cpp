@@ -435,12 +435,13 @@ void Render() {
         state.platforms[i].Render(&program);
     }
     state.player->Render(&program);
-    if (!(state.player->gameOver)) {
-        if (state.player->madeIt)  {
+
+    if (!(state.player->gameOver)) {// if the game is not over
+        if (state.player->madeIt)  { //wait till you make it
             DrawText(&program, fontTextureID, "Mission Successful", 1, -0.5f, glm::vec3(-4.2f, 2.5, 0));
         }
     }
-    else {
+    else { //game is now over
         DrawText(&program, fontTextureID, "Mission Failed", 1, -0.5f, glm::vec3(-3, 2.5, 0));
     }
     
