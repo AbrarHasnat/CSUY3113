@@ -1,6 +1,0 @@
-﻿  Entity.cpp
-  main.cpp
-  ShaderProgram.cpp
-  Generating Code...
-main.obj : error LNK2019: unresolved external symbol "public: static unsigned int __cdecl Util::LoadTexture(char const *)" (?LoadTexture@Util@@SAIPBD@Z) referenced in function "void __cdecl Initialize(void)" (?Initialize@@YAXXZ)
-C:\Users\abrol\Documents\CSUY3113\probmatic_code\Debug\SDLProject.exe : fatal error LNK1120: 1 unresolved externals

@@ -209,6 +209,17 @@ void ProcessInput() {
         state.player->animIndices = state.player->animRight;
     }
 
+    if (keys[SDL_SCANCODE_UP]) { // hold down
+        state.player->started = false;
+        state.player->movement.y = 1.0f;
+        state.player->animIndices = state.player->animUp;
+    }
+    else if (keys[SDL_SCANCODE_DOWN]) {
+        state.player->started = false;
+        state.player->movement.y = -1.0f;
+        state.player->animIndices = state.player->animDown;
+    }
+
 
     if (glm::length(state.player->movement) > 1.0f) {
         state.player->started = false;

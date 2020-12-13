@@ -293,6 +293,7 @@ void Entity::Update(float deltaTime, Entity* player, Entity *objects, int object
     }
     if (!gameOver) {
         velocity.x = movement.x * speed;
+        velocity.y = movement.y * speed;
         velocity += acceleration * deltaTime;
         position.y += velocity.y * deltaTime; // Move on Y
         CheckCollisionsY(map);
